@@ -1,0 +1,2 @@
+# Generate Model
+    dotnet ef dbcontext scaffold "data source=.;Initial Catalog=TestDB;Integrated Security=True;TrustServerCertificate=Yes;" Microsoft.EntityFrameworkCore.SqlServer -o Models --context-dir Data -f
