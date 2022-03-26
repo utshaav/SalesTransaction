@@ -1,0 +1,12 @@
+@model Customer
+@{
+  ViewData["Title"] = Model.Name;
+}
+
+<div class="jumbotron">
+  <h1 class="display-4">@Model.Name</h1>
+  <p class="lead">This is @Model.Name, Adderss @Model.Address</p>
+  <hr class="my-4">
+  <p>View Other customers: </p>
+  <a class="btn btn-primary btn-lg" asp-controller="Customer" asp-action="Index" role="button">Go to List</a>
+</div>

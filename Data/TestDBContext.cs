@@ -17,7 +17,7 @@ namespace SalesTransaction.Data
         {
         }
 
-        public virtual DbSet<Costumer> Costumers { get; set; } = null!;
+        public virtual DbSet<Customer> Customers { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
         public virtual DbSet<Sale> Sales { get; set; } = null!;
         public virtual DbSet<TestTable> TestTables { get; set; } = null!;
@@ -32,9 +32,9 @@ namespace SalesTransaction.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Costumer>(entity =>
+            modelBuilder.Entity<Customer>(entity =>
             {
-                entity.ToTable("Costumer");
+                entity.ToTable("Customer");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 

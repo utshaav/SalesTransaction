@@ -1,0 +1,135 @@
+@model List<Customer>
+@{
+  ViewData["Title"] = "Customers";
+  int i = 0;
+}
+
+<div style="height:20px; width:100%; clear:both;"></div>
+
+
+<div class="container">
+  <div class="row justify-content-between">
+    <h3>List of Customer</h3>
+    <button type="button" class="btn btn-primary  m-b-10" id="add-btn">
+      Add Customer
+    </button>
+  </div>
+</div>
+
+<div style="height:30px; width:100%; clear:both;"></div>
+
+<table class="table table-hover m-t-20">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Address</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    @foreach (var item in Model)
+    {
+      i++;
+      <tr>
+        <th scope="row" onclick="viewDetail(@item.Id)">@i</th>
+        <td onclick="viewDetail(@item.Id)">@item.Name</td>
+        <td onclick="viewDetail(@item.Id)">@item.PhoneNumber</td>
+        <td onclick="viewDetail(@item.Id)">@item.Address</td>
+        <td scope="row">
+          <button style="width: 90px;" type="button" class="btn btn-primary" id="edit-btn" onclick="Update(@item.Id.ToString())">
+            Edit
+          </button>
+          <button style="width: 90px;" type="button" class="btn btn-danger" onclick="Delete(@item.Id.ToString())" data-toggle="modal" data-target="#DeleteModal">
+            Delete
+          </button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+@* <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.jquery.validation.unobtrusive.min.js"></script>
+  <script src="~/lib/jquery/dist/jquery.js"></script>
+  <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script> *@
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+  $('#add-btn').click(function () {
+    debugger
+    $('#exampleModalCenter').modal("hide");
+
+    $.ajax({
+      url: "/Customer/add",
+      success: function (res) {
+        $('#modal-content').html(res);
+        $('#exampleModalCenter').modal("show");
+      }
+    })
+  });
+
+  function Update(id) {
+    debugger
+    $('#exampleModalCenter').modal("hide");
+
+    $.ajax({
+      url: "/Customer/update?id=" + id ,
+      success: function (res) {
+        $('#modal-content').html(res);
+        $('#exampleModalCenter').modal("show");
+      }
+    })
+  }
+
+  function Delete(id){
+    debugger
+    $('#exampleModalCenter').modal("hide");
+    $.ajax({
+      url: "/Customer/delete?id=" + id ,
+      success: function (res) {
+        $('#modal-content').html(res);
+        $('#exampleModalCenter').modal("show");
+      }
+    })
+
+  }
+
+  function viewDetail(id){
+    window.location.href = "/Customer/detail/" + id;
+  }
+
+
+</script>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" id="modal-content" role="document">
+
+  </div>
+</div>
+
+<!-- Toast -->
+
+<div id="delete-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+  @* <div class="toast-header">
+    <img src="..." class="rounded mr-2" alt="...">
+    <strong class="mr-auto">Bootstrap</strong>
+    <small class="text-muted">11 mins ago</small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> *@
+  <div class="toast-body">
+    Customer deleted succesfully!
+  </div>
+</div>
