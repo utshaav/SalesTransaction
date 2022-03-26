@@ -63,15 +63,15 @@ public class CustomerController : Controller
     }
 
     [HttpPost]
-    public IActionResult Delete(Customer customer)
+    public async Task<IActionResult> Delete(Customer customer)
     {
-        customerServices.DeleteById(customer.Id);
+        await customerServices.DeleteById(customer.Id);
         return RedirectToActionPermanent("Index");
     }
 
-    public IActionResult ConfirmDelete(int id)
+    public async Task<IActionResult> ConfirmDelete(int id)
     {
-        customerServices.DeleteById(id);
+        await customerServices.DeleteById(id);
         return RedirectToActionPermanent("Index");
     }
 
