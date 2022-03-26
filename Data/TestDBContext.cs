@@ -21,6 +21,7 @@ namespace SalesTransaction.Data
         public virtual DbSet<Product> Products { get; set; } = null!;
         public virtual DbSet<Sale> Sales { get; set; } = null!;
         public virtual DbSet<TestTable> TestTables { get; set; } = null!;
+        public virtual DbSet<SalesTransactionVM> SalesTransactionVMs { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
