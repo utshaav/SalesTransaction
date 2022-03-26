@@ -1,0 +1,45 @@
+@model Product
+
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLongTitle">Add Product</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div id="modal-content" class="m-b-10">
+    <div class="container">
+      <form asp-controller="Product" asp-action="Add" method="post">
+        <div asp-validation-summary="ModelOnly">
+          <span class="text-danger">Please correct the following errors</span>
+        </div>
+        <div class="form-group">
+          <label asp-for="Name"></label>
+          <input asp-for="Name" type="text" class="form-control" placeholder="Pringles">
+          <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+          <label asp-for="Price"></label>
+          <input type="number" class="form-control" asp-for="Price" placeholder="100">
+        </div>
+        <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer">
+    @* <button type="submit" class="btn btn-primary">Save changes</button> *@
+  </div>
+</div>
+
+@* <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+  <script src="~/lib/jquery/dist/jquery.min.js"></script>
+  <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.jquery-validation-unobtrusive.min.js"></script>
+
+  <script>
+  $('submit').click(function (){
+
+  })
+  </script> *@
