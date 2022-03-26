@@ -24,10 +24,7 @@ namespace SalesTransaction.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // if (!optionsBuilder.IsConfigured)
-            // {
-            //     optionsBuilder.UseSqlServer("data source=.;Initial Catalog=TestDB;Integrated Security=True;TrustServerCertificate=Yes;");
-            // }
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
