@@ -11,7 +11,7 @@ public static class StoredProcedureServices
                 queryString += ",";
                 if (prop.Name.ToLower() == "isbilled")
                 {
-                    bool check = prop.GetValue(pObject) != null && prop.GetValue(pObject).ToString() == "True";
+                    bool check = prop.GetValue(pObject) != null && prop.GetValue(pObject)!.ToString() == "True";
                     var val = check ? 1 : 0;
                     queryString += $" @{prop.Name} = '{val}'";
                 }
