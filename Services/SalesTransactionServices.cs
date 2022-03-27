@@ -4,6 +4,8 @@ using SalesTransaction.Interfaces;
 using SalesTransaction.Models;
 
 namespace SalesTransaction.Services;
+
+
 public class SalesTransactionServices : ISalesTransactionServices
 {
     private readonly TestDBContext context;
@@ -85,6 +87,41 @@ public class SalesTransactionServices : ISalesTransactionServices
         catch (System.Exception)
         {
             return "Failed";
+        }
+    }
+
+    public List<SalesTransactionVM> SelectAllByCustomerId(int customerId, bool fetchAll = false, bool isBilled = false)
+    {
+         List<SalesTransactionVM> sales = new List<SalesTransactionVM>();
+        int i = 1;
+        i = fetchAll ? 0 : i;
+        i = isBilled ? 2 : i;
+        try
+        {
+            sales = context.Set<SalesTransactionVM>().FromSqlRaw($"usp_Sale_Select_ByCustomerId @flag = {i}, @Id = {customerId}").ToList();
+            return sales;
+        }
+        catch (System.Exception)
+        {
+
+            return sales;
+        }
+    }
+
+    public List<SalesTransactionVM> GenerateInvoice(String salesIds, int customerId)
+    {
+        List<SalesTransactionVM> sales = new List<SalesTransactionVM>();
+        try
+        {
+            sales = context.Set<SalesTransactionVM>()
+                           .FromSqlRaw($"usp_Sale_GenerateInvoice @Id = {customerId}, @SalesIds= {salesIds}")
+                           .ToList();
+            return sales;
+        }
+        catch (System.Exception)
+        {
+
+            return sales;
         }
     }
 }

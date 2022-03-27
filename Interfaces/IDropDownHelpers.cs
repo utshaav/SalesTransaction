@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace SalesTransaction.Helpers;
+namespace SalesTransaction.Interfaces;
 public interface IDropDownHelpers
 {
     List<SelectListItem> getProductDD();

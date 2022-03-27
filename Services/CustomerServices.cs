@@ -54,7 +54,7 @@ public class CustomerServices : ICustomerServices
             customers = context.Customers.FromSqlRaw($"usp_Customer_Select @flag = 1").ToList();
             return customers;
         }
-        catch (System.Exception e)
+        catch (System.Exception )
         {
             return customers;
         }
