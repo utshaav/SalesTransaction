@@ -13,8 +13,11 @@
             Costumer Name : @ViewBag.CustomerName <br />
             Address : @ViewBag.CustomerAddress
         </div>
-        <div class="col">
-            BillNumber : 1334
+        <div class="col" >
+            <p style="width:100%; text-align:right">
+                BillNumber : 1334
+            </p>
+           
         </div>
     </div>
 </div>
@@ -36,13 +39,13 @@
         @foreach (var item in Model)
         {
             i++;
-            total = item.Price * item.Quantity;
+            total += item.Price * item.Quantity;
             <tr>
-                <th scope="row" onclick="viewDetail(@item.Id)">@i</th>
-                <td onclick="viewDetail(@item.Id)">@item.ProductName</td>
-                <td onclick="viewDetail(@item.Id)">@item.Quantity</td>
-                <td onclick="viewDetail(@item.Id)">@item.Price</td>
-                <td onclick="viewDetail(@item.Id)">@(item.Price * item.Quantity)</td>
+                <th scope="row" >@i</th>
+                <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@item.Price</td>
+                <td>@(item.Price * item.Quantity)</td>
             </tr>
         }
         <tr>
