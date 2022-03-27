@@ -17,9 +17,11 @@
       </button>
     </div>
     <div class="col">
-      <button type="button" class="btn btn-success  m-b-10 btn-block" style="width:100%;">
-        Generate Invoice
-      </button>
+      <a href="/invoice">
+        <button type="button" class="btn btn-success  m-b-10 btn-block" style="width:100%;">
+          Generate Invoice
+        </button>
+      </a>
     </div>
   </div>
 </div>
@@ -51,14 +53,20 @@
         <td onclick="viewDetail(@item.Id)">@item.Quantity</td>
         <td onclick="viewDetail(@item.Id)">@item.Price</td>
         <td onclick="viewDetail(@item.Id)">@(item.Price * item.Quantity)</td>
-
         <td scope="row">
+        @if(!item.IsBilled){
+
           <button style="width: 90px;" type="button" class="btn btn-primary" id="edit-btn" onclick="Update(@item.Id.ToString())">
             Edit
           </button>
           <button style="width: 90px;" type="button" class="btn btn-danger" onclick="Delete(@item.Id.ToString())" data-toggle="modal" data-target="#DeleteModal">
             Delete
           </button>
+        
+        }
+        else{
+          <p>Already Billed</p>
+        }
         </td>
       </tr>
     }

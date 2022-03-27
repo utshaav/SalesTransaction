@@ -2,7 +2,44 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div style="height:20px; width:100%; clear:both;"></div>
+
+
+<div class="container">
+    <div class="row justify-content-between">
+        <h3>List of Sales Transaction</h3>
+        <br />
+        <div class="col">
+            <a href="/customer">
+                <button type="button" class="btn btn-primary  m-b-10 col" style="width:100%;">
+                    Customers
+                </button>
+            </a>
+        </div>
+        <div class="col">
+            <a href="/product">
+                <button type="button" class="btn btn-warning  m-b-10 btn-block" style="width:100%;">
+                    Products
+                </button>
+            </a>
+        </div>
+    </div>
+<div style="height:20px; width:100%; clear:both;"></div>
+
+    <div class="row justify-content-between">
+        <div class="col">
+            <a href="/salestransaction">
+                <button type="button" class="btn btn-info  m-b-10 col" style="width:100%;" id="add-btn">
+                    Sales Transactions
+                </button>
+            </a>
+        </div>
+        <div class="col">
+            <a href="/invoice">
+                <button type="button" class="btn btn-success  m-b-10 btn-block" style="width:100%;">
+                    Generate Invoice
+                </button>
+            </a>
+        </div>
+    </div>
 </div>

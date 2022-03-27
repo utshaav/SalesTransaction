@@ -4,7 +4,8 @@
 }
 @if (Model.Count > 0)
 {
-    <form asp-action="BillSales" method="post">
+    <form asp-action="Bill" method="post">
+        <input hidden name="invoice.CustomerId" value="@ViewBag.CustomerId">
         <table class="table table-hover m-t-20">
             <thead class="thead-light">
                 <tr>

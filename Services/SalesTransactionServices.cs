@@ -113,8 +113,9 @@ public class SalesTransactionServices : ISalesTransactionServices
         List<SalesTransactionVM> sales = new List<SalesTransactionVM>();
         try
         {
+            string query = $"usp_Sale_GenerateInvoice @Id = {customerId}, @SalesIds= '{salesIds}'";
             sales = context.Set<SalesTransactionVM>()
-                           .FromSqlRaw($"usp_Sale_GenerateInvoice @Id = {customerId}, @SalesIds= {salesIds}")
+                           .FromSqlRaw(query)
                            .ToList();
             return sales;
         }
