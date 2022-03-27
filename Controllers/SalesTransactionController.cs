@@ -1,26 +1,26 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SalesTransaction.Data;
+using SalesTransaction.Helpers;
+using SalesTransaction.Interfaces;
 using SalesTransaction.Models;
 using SalesTransaction.Services;
 
 namespace SalesTransaction.Controllers;
 public class SalesTransactionController : Controller
 {
-    SalesTransactionServices saleServices;
-    CustomerServices customerServices;
-    ProductServices productServices;
-    public SalesTransactionController(TestDBContext context)
+    private readonly ISalesTransactionServices saleServices;
+    private readonly IDropDownHelpers dropDown;
+    public SalesTransactionController(ISalesTransactionServices saleServices, IDropDownHelpers dropDown)
     {
-        saleServices = new SalesTransactionServices(context);
-        customerServices = new CustomerServices(context);
-        productServices = new ProductServices(context);
+        this.dropDown = dropDown;
+        this.saleServices = saleServices;
     }
     public IActionResult Index()
     {
         List<SalesTransactionVM> sales = saleServices.SelectAll();
-        ViewBag.ProductDD = getProductDD();
-        ViewBag.CustomerDD = getCustomerDD();
+        ViewBag.ProductDD = dropDown.getProductDD();
+        ViewBag.CustomerDD = dropDown.getCustomerDD();
         return View(sales);
     }
 
@@ -31,8 +31,8 @@ public class SalesTransactionController : Controller
     }
     public IActionResult Add()
     {
-        ViewBag.ProductDD = getProductDD();
-        ViewBag.CustomerDD = getCustomerDD();
+        ViewBag.ProductDD = dropDown.getProductDD();
+        ViewBag.CustomerDD = dropDown.getCustomerDD();
         return PartialView(new Sale());
     }
 
@@ -44,15 +44,15 @@ public class SalesTransactionController : Controller
             await saleServices.CreateAsync(sale);
             return RedirectToActionPermanent("Index");
         }
-        ViewBag.ProductDD = getProductDD();
-        ViewBag.CustomerDD = getCustomerDD();
+        ViewBag.ProductDD = dropDown.getProductDD();
+        ViewBag.CustomerDD = dropDown.getCustomerDD();
         return View();
     }
 
     public IActionResult Update(int id)
     {
-        ViewBag.ProductDD = getProductDD();
-        ViewBag.CustomerDD = getCustomerDD();
+        ViewBag.ProductDD = dropDown.getProductDD();
+        ViewBag.CustomerDD = dropDown.getCustomerDD();
         Sale sale = saleServices.SelectById(id);
         return PartialView(sale);
     }
@@ -66,8 +66,8 @@ public class SalesTransactionController : Controller
             // Console.WriteLine(result);
             return RedirectPermanent("Index");
         }
-        ViewBag.ProductDD = getProductDD();
-        ViewBag.CustomerDD = getCustomerDD();
+        ViewBag.ProductDD = dropDown.getProductDD();
+        ViewBag.CustomerDD = dropDown.getCustomerDD();
         return View(sale);
     }
 
@@ -90,29 +90,29 @@ public class SalesTransactionController : Controller
         return RedirectToActionPermanent("Index");
     }
 
-    [NonAction]
-    private List<SelectListItem> getCustomerDD()
-    {
-        List<Customer> customers = customerServices.SelectAll();
-        List<SelectListItem> customerDD = new List<SelectListItem>();
-        foreach (Customer customer in customers)
-        {
-            customerDD.Add(new SelectListItem { Value = customer.Id.ToString(), Text = customer.Name });
-        }
-        return customerDD;
-    }
+    // [NonAction]
+    // private List<SelectListItem> getCustomerDD()
+    // {
+    //     List<Customer> customers = customerServices.SelectAll();
+    //     List<SelectListItem> customerDD = new List<SelectListItem>();
+    //     foreach (Customer customer in customers)
+    //     {
+    //         customerDD.Add(new SelectListItem { Value = customer.Id.ToString(), Text = customer.Name });
+    //     }
+    //     return customerDD;
+    // }
 
-    
-    [NonAction]
-    private List<SelectListItem> getProductDD()
-    {
-        List<Product> products = productServices.SelectAll();
-        List<SelectListItem> productDD = new List<SelectListItem>();
-        foreach (Product product in products)
-        {
-            productDD.Add(new SelectListItem { Value = product.Id.ToString(), Text = product.Name });
-        }
-        return productDD;
-    }
+
+    // [NonAction]
+    // private List<SelectListItem> getProductDD()
+    // {
+    //     List<Product> products = productServices.SelectAll();
+    //     List<SelectListItem> productDD = new List<SelectListItem>();
+    //     foreach (Product product in products)
+    //     {
+    //         productDD.Add(new SelectListItem { Value = product.Id.ToString(), Text = product.Name });
+    //     }
+    //     return productDD;
+    // }
 
 }

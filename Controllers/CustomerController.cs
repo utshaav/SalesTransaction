@@ -1,19 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
 using SalesTransaction.Data;
+using SalesTransaction.Interfaces;
 using SalesTransaction.Models;
 using SalesTransaction.Services;
 
 namespace SalesTransaction.Controllers;
 public class CustomerController : Controller
 {
-    private CustomerServices customerServices; 
-    public CustomerController(TestDBContext context)
+    private readonly ICustomerServices customerServices;
+    public CustomerController(ICustomerServices customerServices)
     {
-        customerServices= new CustomerServices(context);
+        this.customerServices = customerServices;
+
     }
     public IActionResult Index()
     {
-        List<Customer> customers = customerServices.SelectAll(); 
+        List<Customer> customers = customerServices.SelectAll();
         return View(customers);
     }
 
@@ -75,5 +77,5 @@ public class CustomerController : Controller
         return RedirectToActionPermanent("Index");
     }
 
-    
+
 }

@@ -10,5 +10,6 @@ namespace SalesTransaction.Models
         public int? ProductId { get; set; }
         public int? Quantity { get; set; }
         public bool? IsBilled { get; set; }
+        public bool? IsDeleted { get; set; }
     }
 }

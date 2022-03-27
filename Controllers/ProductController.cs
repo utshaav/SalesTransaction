@@ -1,19 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using SalesTransaction.Data;
+using SalesTransaction.Interfaces;
 using SalesTransaction.Models;
 using SalesTransaction.Services;
 
 namespace SalesTransaction.Controllers;
 public class ProductController : Controller
 {
-    private ProductServices productServices; 
-    public ProductController(TestDBContext context)
+    private readonly IProductServices productServices;
+    public ProductController(IProductServices productServices)
     {
-        productServices= new ProductServices(context);
+        this.productServices = productServices;
     }
     public IActionResult Index()
     {
-        List<Product> products = productServices.SelectAll(); 
+        List<Product> products = productServices.SelectAll();
         return View(products);
     }
 

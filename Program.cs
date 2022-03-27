@@ -1,13 +1,22 @@
 using Microsoft.EntityFrameworkCore;
 using SalesTransaction.Data;
+using SalesTransaction.Helpers;
+using SalesTransaction.Interfaces;
+using SalesTransaction.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<TestDBContext>(
+var services = builder.Services;
+
+services.AddControllersWithViews();
+services.AddDbContext<TestDBContext>(
     opt => opt.UseSqlServer(connectionString: builder.Configuration.GetConnectionString("Default"))
 );
+services.AddScoped<ICustomerServices, CustomerServices>();
+services.AddScoped<ISalesTransactionServices, SalesTransactionServices>();
+services.AddScoped<IDropDownHelpers, DropDownHelpers>();
+services.AddScoped<IProductServices, ProductServices>();
 
 var app = builder.Build();
 

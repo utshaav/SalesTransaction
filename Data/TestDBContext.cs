@@ -36,7 +36,11 @@ namespace SalesTransaction.Data
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Address).HasMaxLength(20);
+                entity.Property(e => e.Address).HasMaxLength(50);
+
+                entity.Property(e => e.IsDeleted)
+                    .HasColumnName("isDeleted")
+                    .HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.Name).HasMaxLength(30);
 
@@ -49,6 +53,10 @@ namespace SalesTransaction.Data
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.IsDeleted)
+                    .HasColumnName("isDeleted")
+                    .HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.Name).HasMaxLength(30);
             });
 
@@ -57,6 +65,10 @@ namespace SalesTransaction.Data
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.IsBilled).HasColumnName("isBilled");
+
+                entity.Property(e => e.IsDeleted)
+                    .HasColumnName("isDeleted")
+                    .HasDefaultValueSql("((0))");
             });
 
             modelBuilder.Entity<TestTable>(entity =>

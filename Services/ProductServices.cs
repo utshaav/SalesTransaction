@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using SalesTransaction.Data;
+using SalesTransaction.Interfaces;
 using SalesTransaction.Models;
 
 namespace SalesTransaction.Services;
-public class ProductServices
+
+public class ProductServices : IProductServices
 {
     private readonly TestDBContext context;
     public ProductServices(TestDBContext context)
